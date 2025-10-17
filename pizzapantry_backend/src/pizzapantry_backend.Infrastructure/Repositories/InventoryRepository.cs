@@ -146,7 +146,7 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                 var recentAdjustments = adjustments.Select(a => new RecentAdjustmentDto
                 {
                     Reason = a.Reason ?? string.Empty,
-                    AdjustmentAmount = a.Quanity,
+                    AdjustmentAmount = a.Quantity,
                     DateMade = a.CreatedOn.ToString("MMM dd, yyyy 'at' h:mm tt")
                 }).ToList();
 
