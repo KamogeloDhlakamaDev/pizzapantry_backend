@@ -1,0 +1,24 @@
+{
+  "Serilog": {
+    "Using": ["Serilog.Sinks.Console", "Serilog.Sinks.MongoDB"],
+    "MinimumLevel": "Information",
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithThreadId",
+      "WithProcessId"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "MongoDBBson",
+        "Args": {
+          "databaseUrl": "mongodb+srv://kamogelodhlakama_db_user:klYA74qc6drOFnwC@pizza-inventory.z90iyci.mongodb.net/",
+          "collectionName": "ApiLogs"
+        }
+      }
+    ]
+  }
+}

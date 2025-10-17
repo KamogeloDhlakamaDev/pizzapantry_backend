@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A36CB3A6-4939-4AD5-A829-7AD2B43E98A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E23EF1A8-8D91-4F1B-BEAE-1B498C12451D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pizzapantry_backend.Domain", "src\pizzapantry_backend.Domain\pizzapantry_backend.Domain.csproj", "{0748CD02-54A0-4F77-BEC0-D8D53D44CA31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pizzapantry_backend.Application", "src\pizzapantry_backend.Application\pizzapantry_backend.Application.csproj", "{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pizzapantry_backend.Infrastructure", "src\pizzapantry_backend.Infrastructure\pizzapantry_backend.Infrastructure.csproj", "{863C4A6E-045A-45FA-B677-D6E01556A95D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pizzapantry_backend.WebApi", "src\pizzapantry_backend.WebApi\pizzapantry_backend.WebApi.csproj", "{2031F9A3-E128-4801-9D70-1D259FC97BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pizzapantry_backend.Application.Unit.Test", "tests\pizzapantry_backend.Application.Unit.Test\pizzapantry_backend.Application.Unit.Test.csproj", "{2B3750EB-524D-4EDB-8A72-333C24A97FA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0748CD02-54A0-4F77-BEC0-D8D53D44CA31} = {A36CB3A6-4939-4AD5-A829-7AD2B43E98A0}
+		{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9} = {A36CB3A6-4939-4AD5-A829-7AD2B43E98A0}
+		{863C4A6E-045A-45FA-B677-D6E01556A95D} = {A36CB3A6-4939-4AD5-A829-7AD2B43E98A0}
+		{2031F9A3-E128-4801-9D70-1D259FC97BFF} = {A36CB3A6-4939-4AD5-A829-7AD2B43E98A0}
+		{2B3750EB-524D-4EDB-8A72-333C24A97FA1} = {E23EF1A8-8D91-4F1B-BEAE-1B498C12451D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0748CD02-54A0-4F77-BEC0-D8D53D44CA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0748CD02-54A0-4F77-BEC0-D8D53D44CA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0748CD02-54A0-4F77-BEC0-D8D53D44CA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0748CD02-54A0-4F77-BEC0-D8D53D44CA31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29510FD-F0A8-43A1-9E1C-7FFC16F714D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863C4A6E-045A-45FA-B677-D6E01556A95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863C4A6E-045A-45FA-B677-D6E01556A95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863C4A6E-045A-45FA-B677-D6E01556A95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863C4A6E-045A-45FA-B677-D6E01556A95D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2031F9A3-E128-4801-9D70-1D259FC97BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2031F9A3-E128-4801-9D70-1D259FC97BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2031F9A3-E128-4801-9D70-1D259FC97BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2031F9A3-E128-4801-9D70-1D259FC97BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B3750EB-524D-4EDB-8A72-333C24A97FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3750EB-524D-4EDB-8A72-333C24A97FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3750EB-524D-4EDB-8A72-333C24A97FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3750EB-524D-4EDB-8A72-333C24A97FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
