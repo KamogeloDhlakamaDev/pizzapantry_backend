@@ -12,8 +12,6 @@ namespace pizzapantry_backend.Infrastructure.Services
         public readonly MongoClient _client;
         public readonly IMongoDatabase database;
         public IMongoDatabaseSettings _settings;
-        // private readonly IMongoCollection<FormDetails> _formCollection;
-        // private readonly IMongoCollection<Submissions> _formDataCollection;
 
         public InventoryDbService(IMongoDatabaseSettings settings)
         {
