@@ -82,7 +82,7 @@ namespace pizzapantry_backend.Application.Features.AdjustItem.Command
                 When(x => x.AdjustItemRequest != null, () =>
                 {
                     RuleFor(x => x.AdjustItemRequest.Quanity)
-                        .GreaterThanOrEqualTo(0)
+                        .NotEmpty()
                         .WithMessage("Quanity must be greater than or equal to 0.");
 
                     RuleFor(x => x.AdjustItemRequest.ItemId)

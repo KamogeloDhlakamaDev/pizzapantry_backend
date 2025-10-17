@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Common;
 using Domain.Response;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using pizzapantry_backend.Application.Features.Inventory.Repository;
 using pizzapantry_backend.Domain.Common;
 using pizzapantry_backend.Domain.Mongo;
@@ -35,6 +36,16 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
                 {
                     return new OnError(HttpStatusCode.NotFound, error: "Could not find associated item");
                 }
+                updateItem.Category = request.UpdateItemRequest.Category;
+                updateItem.CurrentQuanity = request.UpdateItemRequest.CurrentQuanity;
+                updateItem.Description = request.UpdateItemRequest.Description;
+                updateItem.ItemName = request.UpdateItemRequest.ItemName;
+                updateItem.Location = request.UpdateItemRequest.Location;
+                updateItem.MinimumQuantity = request.UpdateItemRequest.MinimumQuantity;
+                updateItem.SellingPrice = request.UpdateItemRequest.SellingPrice;
+                updateItem.SKU = request.UpdateItemRequest.SKU;
+
+
                 bool isUpdated = await _inventoryRepository.UpdateItem(updateItem);
 
                 if (!isUpdated)

@@ -31,17 +31,60 @@ namespace pizzapantry_backend.Infrastructure.Repositories
 
         public async Task<bool> AdjustItemQuanty(AdjustmentHistory adjustItem)
         {
+            using var session = await _client.StartSessionAsync();
+            session.StartTransaction();
+
             try
             {
+                if (!ObjectId.TryParse(adjustItem.ItemId, out var objectId))
+                {
+                    Log.Error($"Invalid ItemId format: {adjustItem.ItemId}");
+                    return false;
+                }
+
+                var item = await _itemCollection
+                    .Find(i => i.ItemId == adjustItem.ItemId)
+                    .FirstOrDefaultAsync();
+
+                if (item == null)
+                {
+                    Log.Error($"Item not found for ID: {adjustItem.ItemId}");
+                    return false;
+                }
+
+                var newQuantity = item.CurrentQuanity + adjustItem.Quantity;
+
+                var update = Builders<Item>.Update
+                    .Set(i => i.CurrentQuanity, newQuantity);
+
+                await _itemCollection.UpdateOneAsync(
+                    i => i.ItemId == adjustItem.ItemId,
+                    update
+                );
+
+                adjustItem.AdjustmentId = ObjectId.GenerateNewId();
+                adjustItem.CreatedOn = DateTime.UtcNow;
+
                 await _adjustmentCollection.InsertOneAsync(adjustItem);
+
+                await session.CommitTransactionAsync();
+                Log.Information($"Successfully adjusted item {adjustItem.ItemId}, new quantity: {newQuantity}");
                 return true;
             }
             catch (MongoWriteException ex)
             {
+                await session.AbortTransactionAsync();
                 Log.Error($"Mongo write error: {ex.Message}");
                 return false;
             }
+            catch (Exception ex)
+            {
+                await session.AbortTransactionAsync();
+                Log.Error($"Unexpected error adjusting item quantity: {ex.Message}");
+                return false;
+            }
         }
+
 
         public async Task<ItemToAdjustDto?> GetItemToAdjust(string itemId)
         {
@@ -49,7 +92,7 @@ namespace pizzapantry_backend.Infrastructure.Repositories
             try
             {
                 var item = await _itemCollection
-                    .Find(i => i.ItemId == ObjectId.Parse(itemId))
+                    .Find(i => i.ItemId == itemId)
                     .FirstOrDefaultAsync();
 
                 if (item == null)

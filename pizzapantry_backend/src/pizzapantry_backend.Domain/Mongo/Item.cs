@@ -10,7 +10,8 @@ namespace pizzapantry_backend.Domain.Mongo
     public class Item
     {
         [BsonId]
-        public ObjectId ItemId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ItemId { get; set; } = string.Empty;
         public string ItemName { get; set; } = string.Empty;
         public string SKU { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
@@ -21,5 +22,5 @@ namespace pizzapantry_backend.Domain.Mongo
 
         public double SellingPrice { get; set; }
         public DateTime CreatedOn { get; set; }
-    }   
+    }
 }

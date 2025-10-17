@@ -213,7 +213,7 @@ namespace pizzapantry_backend.Infrastructure.Repositories
         {
             try
             {
-                var filter = Builders<Item>.Filter.Eq(i => i.ItemId, ObjectId.Parse(itemId));
+                var filter = Builders<Item>.Filter.Eq(i => i.ItemId, itemId);
 
                 var update = Builders<Item>.Update.Set(i => i.CurrentQuanity, 0);
 
