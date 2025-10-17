@@ -12,7 +12,7 @@ namespace pizzapantry_backend.Domain.Mongo
         [BsonId]
         public ObjectId AdjustmentId { get; set; }
         public required string ItemId { get; set; }
-        public int Quanity { get; set; }
+        public int Quantity { get; set; }
         public string? Reason { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; } = string.Empty;
