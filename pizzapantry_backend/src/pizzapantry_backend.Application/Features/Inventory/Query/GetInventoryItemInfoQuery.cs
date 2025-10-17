@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Common;
+using Domain.Response;
 
 namespace pizzapantry_backend.Application.Features.Inventory.Query
 {
-    public class GetInventoryItemInfoQuery
-    {
+    public record GetInventoryItemInfoQuery(string ItemId) :
+        IRequest<Result<OnSuccess<InventoryInfoResponse>, OnError>>;
 
-    }
 
     public class InventoryInfoResponse
     {
