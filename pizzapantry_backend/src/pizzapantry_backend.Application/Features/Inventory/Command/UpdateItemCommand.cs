@@ -45,7 +45,8 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
                     Response = new GenericResponse
                     {
                         IsSuccess = true,
-                        Message = "Successfully updated an item."
+                        Message = "Successfully updated an item.",
+                        ItemId = updateItem.ItemId.ToString()
                     }
                 };
             }

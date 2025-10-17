@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities.Mongo;
 using Microsoft.Extensions.Options;
-using pizzapantry_backend.Application.Interfaces;
+
 
 namespace pizzapantry_backend.WebApi
 {
@@ -25,7 +25,7 @@ namespace pizzapantry_backend.WebApi
 
             services.AddSingleton<IMongoDatabaseSettings>(sp => sp.GetRequiredService<IOptions<MongoDatabaseSettings>>().Value);
 
-            services.AddSingleton<IInventoryDBService>();
+
 
             //Metrics setup
             services.AddMetrics();

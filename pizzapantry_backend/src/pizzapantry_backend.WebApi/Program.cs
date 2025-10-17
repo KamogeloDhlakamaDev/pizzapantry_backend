@@ -4,10 +4,9 @@ using Domain.Entities.Mongo;
 using FluentValidation;
 using Infrastructure.Softiator;
 using pizzapantry_backend.Application;
-using pizzapantry_backend.Application.Interfaces;
+
 using pizzapantry_backend.Infrastructure;
-using pizzapantry_backend.Infrastructure.Persistence;
-using pizzapantry_backend.Infrastructure.Services;
+
 using pizzapantry_backend.WebApi;
 
 
@@ -54,7 +53,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<ISoftiator, Softiator>();
-builder.Services.AddSingleton<IInventoryDBService, InventoryDbService>();
+
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(AppDomain.CurrentDomain.Load("pizzapantry_backend.Application"));
 

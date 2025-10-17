@@ -61,7 +61,8 @@ namespace pizzapantry_backend.Infrastructure.Repositories
 
                 var result = await _itemCollection.UpdateOneAsync(filter, update);
 
-                return result.ModifiedCount > 0;
+
+                return result.MatchedCount > 0;
             }
             catch (Exception ex)
             {
@@ -69,6 +70,7 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                 return false;
             }
         }
+
 
 
         public async Task<Item?> GetInventoryItem(string itemId)

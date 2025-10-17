@@ -1,16 +1,61 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Common;
 using Domain.Response;
+using pizzapantry_backend.Application.Features.Inventory.Repository;
 
 namespace pizzapantry_backend.Application.Features.Inventory.Query
 {
     public record GetInventoryItemInfoQuery(string ItemId) :
         IRequest<Result<OnSuccess<InventoryInfoResponse>, OnError>>;
 
+    public class GetInventoryItemInfoQueryHandler :
+        IRequestHandler<GetInventoryItemInfoQuery, Result<OnSuccess<InventoryInfoResponse>, OnError>>
+    {
+        private readonly ILogger _logger;
+        private readonly IInventoryRepository _inventoryRepository;
 
+        public GetInventoryItemInfoQueryHandler(
+            ILogger logger,
+            IInventoryRepository inventoryRepository
+        )
+        {
+            _logger = logger;
+            _inventoryRepository = inventoryRepository;
+        }
+
+        public async Task<Result<OnSuccess<InventoryInfoResponse>, OnError>> Handle(GetInventoryItemInfoQuery request, CancellationToken cancellationToken = default)
+        {
+            BasicInventoryItemInfoDto? basicInventoryItemInfoDto = await _inventoryRepository.GetInventoryItemInfo(request.ItemId);
+
+            if (basicInventoryItemInfoDto is null)
+            {
+                return new OnError(HttpStatusCode.BadRequest, error: "Could not get basic inventory info");
+            }
+
+            return new OnSuccess<InventoryInfoResponse>
+            {
+                Response = new InventoryInfoResponse()
+                {
+                    InventoryItem = basicInventoryItemInfoDto
+                },
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+    }
+
+    public class GetInventoryItemInfoQueryValidation : AbstractValidator<GetInventoryItemInfoQuery>
+    {
+        public GetInventoryItemInfoQueryValidation()
+        {
+            RuleFor(x => x.ItemId)
+                .NotEmpty()
+                .WithMessage("Item cannot be empty.");
+        }
+    }
     public class InventoryInfoResponse
     {
         public BasicInventoryItemInfoDto? InventoryItem { get; set; }
