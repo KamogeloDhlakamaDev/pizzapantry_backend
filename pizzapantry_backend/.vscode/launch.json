@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "C#: pizzapantry_backend.WebApi",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\src\\pizzapantry_backend.WebApi\\pizzapantry_backend.WebApi.csproj",
+      "launchConfigurationId": "TargetFramework=;pizzapantry_backend.WebApi"
+    }
+  ]
+}

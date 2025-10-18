@@ -14,7 +14,6 @@ namespace pizzapantry_backend.Infrastructure.Repositories
 {
     public class InventoryRepository : IInventoryRepository
     {
-
         public readonly MongoClient _client;
         public readonly IMongoDatabase database;
         public IMongoDatabaseSettings _settings;
@@ -60,7 +59,6 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                     .Set(i => i.SellingPrice, updatedItem.SellingPrice);
 
                 var result = await _itemCollection.UpdateOneAsync(filter, update);
-
 
                 return result.MatchedCount > 0;
             }
@@ -152,7 +150,6 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                     DateMade = a.CreatedOn.ToString("MMM dd, yyyy 'at' h:mm tt")
                 }).ToList();
 
-
                 var dto = new BasicInventoryItemInfoDto
                 {
                     ItemId = item.ItemId.ToString(),
@@ -164,7 +161,8 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                     SellingPrice = item.SellingPrice,
                     Description = item.Description,
                     Status = GetStockStatus(item.CurrentQuanity, item.MinimumQuantity),
-                    RecentAdjustments = recentAdjustments
+                    RecentAdjustments = recentAdjustments,
+                    MinimumQuantity = item.MinimumQuantity
                 };
 
                 return dto;
@@ -197,6 +195,7 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                     Location = item.Location,
                     SellingPrice = item.SellingPrice,
                     Description = item.Description,
+                    MinimumQuantity = item.MinimumQuantity,
                     Status = GetStockStatus(item.CurrentQuanity, item.MinimumQuantity)
                 };
 

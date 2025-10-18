@@ -37,14 +37,13 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
                     return new OnError(HttpStatusCode.NotFound, error: "Could not find associated item");
                 }
                 updateItem.Category = request.UpdateItemRequest.Category;
-                updateItem.CurrentQuanity = request.UpdateItemRequest.CurrentQuanity;
+                updateItem.CurrentQuanity = request.UpdateItemRequest.Quanity;
                 updateItem.Description = request.UpdateItemRequest.Description;
                 updateItem.ItemName = request.UpdateItemRequest.ItemName;
                 updateItem.Location = request.UpdateItemRequest.Location;
                 updateItem.MinimumQuantity = request.UpdateItemRequest.MinimumQuantity;
                 updateItem.SellingPrice = request.UpdateItemRequest.SellingPrice;
                 updateItem.SKU = request.UpdateItemRequest.SKU;
-
 
                 bool isUpdated = await _inventoryRepository.UpdateItem(updateItem);
 
@@ -88,12 +87,12 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
                 RuleFor(x => x.UpdateItemRequest.Category)
                     .MaximumLength(100).WithMessage("Category must be at most 100 characters.");
 
-                RuleFor(x => x.UpdateItemRequest.CurrentQuanity)
+                RuleFor(x => x.UpdateItemRequest.Quanity)
                     .GreaterThanOrEqualTo(0).WithMessage("Current Quanity must be 0 or greater.");
 
                 RuleFor(x => x.UpdateItemRequest.MinimumQuantity)
                     .GreaterThanOrEqualTo(0).WithMessage("Minimum Quantity must be 0 or greater.")
-                    .LessThanOrEqualTo(x => x.UpdateItemRequest.CurrentQuanity)
+                    .LessThanOrEqualTo(x => x.UpdateItemRequest.Quanity)
                     .WithMessage("Minimum Quantity must be less than or equal to CurrentQuanity.");
 
                 RuleFor(x => x.UpdateItemRequest.Location)
@@ -112,7 +111,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
         public required string ItemName { get; set; }
         public string SKU { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
-        public int CurrentQuanity { get; set; }
+        public int Quanity { get; set; }
         public int MinimumQuantity { get; set; }
         public string Location { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

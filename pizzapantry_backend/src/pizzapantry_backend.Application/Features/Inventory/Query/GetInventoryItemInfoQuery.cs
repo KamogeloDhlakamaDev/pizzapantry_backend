@@ -40,7 +40,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Query
             {
                 Response = new InventoryInfoResponse()
                 {
-                    InventoryItem = basicInventoryItemInfoDto
+                    InventoryItemInfo = basicInventoryItemInfoDto
                 },
                 StatusCode = HttpStatusCode.OK
             };
@@ -58,7 +58,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Query
     }
     public class InventoryInfoResponse
     {
-        public BasicInventoryItemInfoDto? InventoryItem { get; set; }
+        public BasicInventoryItemInfoDto? InventoryItemInfo { get; set; }
     }
 
     public class BasicInventoryItemInfoDto
@@ -72,6 +72,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Query
         public string Location { get; set; } = string.Empty;
         public double SellingPrice { get; set; }
         public string Description { get; set; } = string.Empty;
+        public int MinimumQuantity { get; set; }
         public List<RecentAdjustmentDto> RecentAdjustments { get; set; } = [];
     }
 
