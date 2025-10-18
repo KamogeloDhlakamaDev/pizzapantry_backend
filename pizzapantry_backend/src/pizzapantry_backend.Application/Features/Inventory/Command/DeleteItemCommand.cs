@@ -33,7 +33,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
         {
             try
             {
-                bool isItemRemoved = await _inventoryRepository.RemoveItemStock(request.ItemId);
+                bool isItemRemoved = await _inventoryRepository.DeleteItem(request.ItemId);
 
                 if (!isItemRemoved)
                 {
@@ -45,7 +45,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
                     Response = new GenericResponse()
                     {
                         IsSuccess = true,
-                        Message = "Successfully removed the stock",
+                        Message = "Successfully Deleted item",
                         ItemId = request.ItemId
                     }
                 };

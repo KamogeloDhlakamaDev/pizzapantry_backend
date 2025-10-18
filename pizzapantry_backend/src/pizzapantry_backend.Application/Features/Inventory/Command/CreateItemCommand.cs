@@ -34,7 +34,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
         {
             try
             {
-               
+
                 Item createItem = new Item
                 {
                     Category = request.CreateItemRequest.Category,
@@ -89,11 +89,6 @@ namespace pizzapantry_backend.Application.Features.Inventory.Command
 
                 RuleFor(x => x.CreateItemRequest.CurrentQuanity)
                     .GreaterThanOrEqualTo(0).WithMessage("Current Quanity must be 0 or greater.");
-
-                RuleFor(x => x.CreateItemRequest.MinimumQuantity)
-                    .GreaterThanOrEqualTo(0).WithMessage("Minimum Quantity must be 0 or greater.")
-                    .LessThanOrEqualTo(x => x.CreateItemRequest.CurrentQuanity)
-                    .WithMessage("Minimum Quantity must be less than or equal to CurrentQuanity.");
 
                 RuleFor(x => x.CreateItemRequest.Location)
                     .MaximumLength(200).WithMessage("Location must be at most 200 characters.");
