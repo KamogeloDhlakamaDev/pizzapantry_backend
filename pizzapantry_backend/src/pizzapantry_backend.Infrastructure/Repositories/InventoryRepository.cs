@@ -99,7 +99,9 @@ namespace pizzapantry_backend.Infrastructure.Repositories
             {
                 var items = await _itemCollection.Find(_ => true).ToListAsync();
 
-                var itemsDto = items.Select(i => new ItemsDto
+                var itemsOrderd = items.OrderByDescending(x => x.CreatedOn);
+
+                var itemsDto = itemsOrderd.Select(i => new ItemsDto
                 {
                     ItemId = i.ItemId.ToString(),
                     ItemName = i.ItemName,
@@ -226,5 +228,26 @@ namespace pizzapantry_backend.Infrastructure.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> DeleteItem(string itemId)
+        {
+
+            try
+            {
+                
+                var filter = Builders<Item>.Filter.Eq(i => i.ItemId, itemId);
+
+                var result = await _itemCollection.DeleteOneAsync(filter);
+
+
+                return result.DeletedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error deleting item {itemId}: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }

@@ -119,6 +119,38 @@ namespace pizzapantry_backend.WebApi.Controllers
             }
         }
 
+        [HttpPost("delete_inventory_item/{itemId}")]
+        public async Task<IActionResult> DeleteInventoryItem(string itemId)
+        {
+            try
+            {
+                var command = new DeleteItemCommand(itemId);
+                var result = await _softiator.Send(command);
+
+                return result.Match<IActionResult>(
+                    success => Ok(success.Response),
+                    failure => StatusCode((int)failure.StatusCode, new ApiError
+                    {
+                        Message = failure.Error,
+                        StatusCode = (int)failure.StatusCode
+                    })
+                );
+            }
+            catch (ValidationException ex)
+            {
+                var errors = ex.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+
+                return BadRequest(new ApiError
+                {
+                    Message = "Validation failed.",
+                    ValidationErrors = errors,
+                    StatusCode = 400
+                });
+            }
+        }
+
         [HttpGet("get_all_inventory_items")]
         public async Task<IActionResult> GetInventoryAllItems()
         {

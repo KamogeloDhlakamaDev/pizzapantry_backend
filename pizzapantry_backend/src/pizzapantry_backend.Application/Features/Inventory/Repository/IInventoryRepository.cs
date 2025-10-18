@@ -11,6 +11,7 @@ namespace pizzapantry_backend.Application.Features.Inventory.Repository
     {
         Task<bool> CreateItem(Item createItem);
         Task<bool> UpdateItem(Item createItem);
+        Task<bool> DeleteItem(string ItemID);
         Task<Item?> GetInventoryItem(string itemId);
         Task<DetailedInventoryItemInfoDto?> GetDetailedInventoryInfo(string itemId);
         Task<List<ItemsDto>> GetInventoryItems();
