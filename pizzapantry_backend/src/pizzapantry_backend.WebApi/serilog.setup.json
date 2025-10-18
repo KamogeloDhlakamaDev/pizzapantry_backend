@@ -15,7 +15,7 @@
       {
         "Name": "MongoDBBson",
         "Args": {
-          "databaseUrl": "mongodb+srv://kamogelodhlakama_db_user:klYA74qc6drOFnwC@pizza-inventory.z90iyci.mongodb.net/",
+          "databaseUrl": "mongodb+srv://kamogelodhlakama_db_user:klYA74qc6drOFnwC@pizza-inventory.z90iyci.mongodb.net/pizza_inventory",
           "collectionName": "ApiLogs"
         }
       }

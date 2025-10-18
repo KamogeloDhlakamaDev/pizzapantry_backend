@@ -4,10 +4,9 @@ using Domain.Entities.Mongo;
 using FluentValidation;
 using Infrastructure.Softiator;
 using pizzapantry_backend.Application;
-using pizzapantry_backend.Application.Interfaces;
+
 using pizzapantry_backend.Infrastructure;
-using pizzapantry_backend.Infrastructure.Persistence;
-using pizzapantry_backend.Infrastructure.Services;
+
 using pizzapantry_backend.WebApi;
 
 
@@ -16,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.ConfigureServices();
 
-builder.Services.AddHttpContextAccessor();
+
 
 // Adding the configuration services
 builder.Services.AddInfrastructure(configuration);
@@ -39,22 +38,13 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-var frontendUrl = "http://localhost:5173";
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy =>
-        {
-            policy.WithOrigins(frontendUrl)
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials();
-        });
-});
 
 builder.Services.AddScoped<ISoftiator, Softiator>();
-builder.Services.AddSingleton<IInventoryDBService, InventoryDbService>();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSwaggerGen();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(AppDomain.CurrentDomain.Load("pizzapantry_backend.Application"));
 
@@ -92,7 +82,6 @@ if (app.Environment.IsDevelopment())
     using var scope = app.Services.CreateScope();
 
 }
-
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
