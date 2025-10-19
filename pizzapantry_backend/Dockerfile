@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy the solution and restore
+# Copy the solution and project folders
 COPY pizzapantry_backend.sln ./
 COPY src/pizzapantry_backend.Application ./src/pizzapantry_backend.Application
 COPY src/pizzapantry_backend.Domain ./src/pizzapantry_backend.Domain
@@ -23,6 +23,7 @@ ENV ASPNETCORE_URLS=http://+:$PORT
 EXPOSE $PORT
 
 ENTRYPOINT ["dotnet", "pizzapantry_backend.WebApi.dll"]
+
 
 
 
